@@ -14,9 +14,9 @@ const categoryConfigs = {
     title: 'Physics',
     subjects: ['physics', 'quantum_physics', 'astrophysics'],
   },
-  time: {
-    title: 'Time',
-    subjects: ['time', 'space_time', 'time_perception'],
+  'ancient-india-history': {
+    title: 'History of Ancient India',
+    subjects: ['ancient_india', 'india_history', 'india,_antiquities'],
   },
   'time-management': {
     title: 'Time Management',
@@ -102,7 +102,11 @@ app.get('/api/books', async (req, res) => {
     res.json({ updatedAt: new Date().toISOString(), categories: payload });
   } catch (error) {
     console.error('Failed to fetch books', error.message);
-    const cached = await prisma.book.findMany({ orderBy: { rating: 'desc' } });
+    const validCategories = Object.keys(categoryConfigs);
+    const cached = await prisma.book.findMany({
+      where: { category: { in: validCategories } },
+      orderBy: { rating: 'desc' },
+    });
     if (cached.length) {
       const payload = cached.reduce((acc, book) => {
         if (!acc[book.category]) {
@@ -111,6 +115,11 @@ app.get('/api/books', async (req, res) => {
         acc[book.category].books.push(book);
         return acc;
       }, {});
+      for (const category of validCategories) {
+        if (!payload[category]) {
+          payload[category] = { title: categoryConfigs[category].title, books: [] };
+        }
+      }
       return res.json({ updatedAt: new Date().toISOString(), categories: payload, cached: true });
     }
     res.status(500).json({ error: 'Unable to load books right now.' });
