@@ -77,8 +77,8 @@ const categoryConfigs = {
 };
 
 const titleAliases = {
-  Golden Road: 'The Golden Road',
-  India: 'India: A History',
+  'Golden Road': 'The Golden Road',
+  'India': 'India: A History',
   'Make time': 'Make Time',
   'The wonder that was India': 'The Wonder That Was India',
 };
