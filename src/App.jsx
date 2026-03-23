@@ -7,7 +7,7 @@ import BookCard from './components/BookCard';
 
 const categoryMeta = {
   physics: { label: 'Physics', icon: Atom, accent: 'from-skyPop-300 to-skyPop-500' },
-  'ancient-india-history': { label: 'History of Ancient India', icon: Landmark, accent: 'from-brand-300 to-brand-600' },
+  'ancient-india-history': { label: 'History of India', icon: Landmark, accent: 'from-brand-300 to-brand-600' },
   'time-management': { label: 'Time Management', icon: AlarmClockCheck, accent: 'from-berry-300 to-berry-500' },
 };
 
@@ -58,7 +58,7 @@ export default function App() {
                 Popular books today
               </span>
               <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 md:text-6xl">
-                Bright shelves for physics, ancient India, and smarter days.
+                Bright shelves for physics, Indian history, and smarter days.
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-slate-700 md:text-lg">
                 Explore live book picks grouped into three colorful tabs. Each shelf highlights books readers are gravitating toward right now.
@@ -89,7 +89,7 @@ export default function App() {
                 <ActiveIcon className="h-12 w-12" />
                 <h2 className="mt-6 text-2xl font-bold">{activeTitle}</h2>
                 <p className="mt-2 text-base text-white/90">
-                  Switch tabs to browse a vivid mix of foundational science, ancient Indian history, and practical productivity reads.
+                  Switch tabs to browse a vivid mix of foundational science, Indian history, and practical productivity reads.
                 </p>
               </div>
             </div>
