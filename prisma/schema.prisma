@@ -17,6 +17,8 @@ model Book {
   rating      Float
   year        Int?
   sourceKey   String   @unique
+  externalUrl String   @default("")
+  externalSource String @default("Goodreads")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

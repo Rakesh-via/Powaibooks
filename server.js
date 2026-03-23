@@ -50,6 +50,11 @@ const pickDescription = (work, category) => {
   return 'A standout read drawing attention from curious readers right now.';
 };
 
+const buildBookLink = (title, author) => {
+  const query = encodeURIComponent(`${title} ${author}`.trim());
+  return `https://www.goodreads.com/search?q=${query}`;
+};
+
 const normalizeBook = (work, category) => ({
   category,
   title: work.title,
@@ -61,6 +66,8 @@ const normalizeBook = (work, category) => ({
   rating: Math.max(3.8, Math.min(5, ((work.ratings_average || 4.2) + (work.want_to_read_count ? 0.2 : 0)).toFixed(1))),
   year: work.first_publish_year || null,
   sourceKey: `${category}:${work.key}`,
+  externalUrl: buildBookLink(work.title, work.authors?.[0]?.name || 'Unknown author'),
+  externalSource: 'Goodreads',
 });
 
 async function searchWorks(query) {
@@ -94,6 +101,8 @@ function normalizeSearchDoc(doc, category) {
     rating: Math.max(3.9, Math.min(5, Number((((doc.ratings_average || 4.2) + ((doc.ratings_count || 0) > 20 ? 0.2 : 0))).toFixed(1)))),
     year: doc.first_publish_year || null,
     sourceKey: `${category}:search:${doc.key}`,
+    externalUrl: buildBookLink(doc.title, doc.author_name?.[0] || 'Unknown author'),
+    externalSource: 'Goodreads',
   };
 }
 
