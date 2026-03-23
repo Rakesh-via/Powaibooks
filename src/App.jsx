@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { AlarmClockCheck, Atom, Clock3, RefreshCw } from 'lucide-react';
+import { AlarmClockCheck, Atom, Clock3, RefreshCw, SunMedium, Zap } from 'lucide-react';
 import CategoryTabs from './components/CategoryTabs';
 import BookCard from './components/BookCard';
 
@@ -41,6 +41,7 @@ export default function App() {
 
   const activeBooks = data?.categories?.[activeCategory]?.books || [];
   const ActiveIcon = categoryMeta[activeCategory].icon;
+  const activeTitle = data?.categories?.[activeCategory]?.title || categoryMeta[activeCategory].label;
 
   return (
     <main className="min-h-screen px-4 py-6 text-slate-900 sm:px-5">
@@ -62,6 +63,14 @@ export default function App() {
               <p className="max-w-2xl text-base leading-relaxed text-slate-700 md:text-lg">
                 Explore live book picks grouped into three colorful tabs. Each shelf highlights books readers are gravitating toward right now.
               </p>
+              <div className="flex flex-wrap gap-3">
+                <div className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-white/75 px-4 py-2 text-sm font-semibold text-slate-700">
+                  <SunMedium className="h-4 w-4 text-brand-600" /> Bright visual theme
+                </div>
+                <div className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-white/75 px-4 py-2 text-sm font-semibold text-slate-700">
+                  <Zap className="h-4 w-4 text-berry-500" /> Live category shelves
+                </div>
+              </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
@@ -78,7 +87,7 @@ export default function App() {
             <div className="rounded-[28px] bg-white/75 p-5 shadow-inner">
               <div className={`rounded-[24px] bg-gradient-to-br ${categoryMeta[activeCategory].accent} p-6 text-white shadow-lg`}>
                 <ActiveIcon className="h-12 w-12" />
-                <h2 className="mt-6 text-2xl font-bold">{categoryMeta[activeCategory].label}</h2>
+                <h2 className="mt-6 text-2xl font-bold">{activeTitle}</h2>
                 <p className="mt-2 text-base text-white/90">
                   Switch tabs to browse a vivid mix of foundational science, deep thinking about time, and practical productivity reads.
                 </p>
@@ -89,6 +98,16 @@ export default function App() {
 
         <section className="space-y-5 rounded-[32px] bg-white/60 p-4 shadow-[0_18px_50px_rgba(219,39,119,0.12)] backdrop-blur md:p-6">
           <CategoryTabs categories={categories} activeCategory={activeCategory} onChange={setActiveCategory} />
+
+          <div className="flex flex-col gap-2 rounded-[24px] bg-gradient-to-r from-white to-brand-50 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-berry-600">Current shelf</p>
+              <h3 className="text-2xl font-bold tracking-tight text-slate-900">{activeTitle}</h3>
+            </div>
+            <p className="text-base text-slate-600">
+              {activeBooks.length} popular books loaded for this tab.
+            </p>
+          </div>
 
           {loading ? (
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

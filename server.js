@@ -12,15 +12,15 @@ app.use(express.json());
 const categoryConfigs = {
   physics: {
     title: 'Physics',
-    subjects: ['physics', 'quantum physics', 'astrophysics'],
+    subjects: ['physics', 'quantum_physics', 'astrophysics'],
   },
   time: {
     title: 'Time',
-    subjects: ['time', 'space and time', 'time perception'],
+    subjects: ['time', 'space_time', 'time_perception'],
   },
   'time-management': {
     title: 'Time Management',
-    subjects: ['time management', 'productivity', 'self-management'],
+    subjects: ['time_management', 'productivity', 'self_management'],
   },
 };
 
@@ -51,7 +51,7 @@ async function fetchCategoryBooks(category) {
 
   const subjectResults = await Promise.all(
     config.subjects.map((subject) =>
-      axios.get(`https://openlibrary.org/subjects/${encodeURIComponent(subject)}.json`, {
+      axios.get(`https://openlibrary.org/subjects/${subject}.json`, {
         params: { limit: 12, details: 'true' },
         timeout: 10000,
       })
