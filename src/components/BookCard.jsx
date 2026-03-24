@@ -31,7 +31,8 @@ export default function BookCard({ book, index }) {
                 href={book.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-sm transition hover:text-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-200"
+                aria-label={`View details for ${book.title} on ${book.externalSource}`}
+                className="rounded-sm underline decoration-brand-300 decoration-2 underline-offset-4 transition hover:text-brand-700 hover:decoration-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-200"
               >
                 {book.title}
               </a>
