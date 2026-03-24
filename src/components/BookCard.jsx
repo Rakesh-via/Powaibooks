@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BookOpen, ExternalLink, Sparkles, Star } from 'lucide-react';
+import { BookOpen, Sparkles, Star } from 'lucide-react';
 
 const MotionArticle = motion.article;
 
@@ -51,15 +51,6 @@ export default function BookCard({ book, index }) {
           <span className="inline-flex items-center gap-2 rounded-full bg-berry-100 px-3 py-2 text-berry-700">
             <Sparkles className="h-4 w-4" /> Bright pick
           </span>
-          <a
-            href={book.externalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-brand-100 px-3 py-2 text-brand-800 transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-brand-200"
-            aria-label={`Open ${book.title} on ${book.externalSource}`}
-          >
-            <ExternalLink className="h-4 w-4" /> {book.externalSource}
-          </a>
         </div>
       </div>
     </MotionArticle>
